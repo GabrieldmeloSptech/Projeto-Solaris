@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <h1><b>Cadastre-se </b></h1>
+
+    Nome da Empresa/Pessoa física: <input type="text" id="ipt_nome_empresa"> <br><br>
+
+    Email: <input type="text" id="ipt_email"> <br><br>
+
+    CNPJ ou CPF: <input type="text" id="ipt_cpf_cnjp"> <br><br>
+
+    Medidas agrárias:  <input type="text" id="ipt_medidas"> Hectares <br><br> 
+    
+    Tipo de produção: <input type="text" id="ipt_semente"> <br><br>
+
+    Estimativa de produção: <input type="text" id="ipt_producao"> KG's <br><br>
+
+    Preço de venda: <input type="text" id="ipt_preco_venda"> R$ <br><br> 
+
+    Descrição da necessidade : <input type="text" id="ipt_motivo_procura"> <br><br>
+
+    Senha: <input type="text" id="ipt_senha"> <br><br>
+
+    <button onclick="FcadastrarUsuarioBD()">Concluir Cadastro</button> <br><br>
+
+    <p><i>Para uma melhor visualização do cenário final, a Tributação calculada é de 7%, estimando o total de impostos nacionais e estaduais.</i></p> <br>
+
+    <div id="div_resultado_conta">hthtdrga</div><br><br>
+    
+    <div id="div_mensagemCadastro"></div> <br><br>
+
+
+
+
+    <!--Concetados ao BD de cadastro da empresa-->
+
+<script>
+
+    function FcadastrarUsuarioBD() {
+
+        let nome = (ipt_nome_empresa.value);
+
+        let CpfCnpj = Number(ipt_cpf_cnjp.value);
+
+        let medidaAgraria = Number(ipt_medidas.value);
+
+        let semente = (ipt_semente.value);
+
+        let necessidade = (ipt_motivo_procura.value);
+
+        let senha = (ipt_senha.value);
+
+        let estimativaProducao = Number(ipt_producao.value);
+
+        let precoVenda = Number(ipt_preco_venda.value);
+
+
+        if (nome == "") {
+
+            div_mensagemCadastro.innerHTML = `<i style = "color : #ff0000;"> <b>Algo de errado aconteceu durante seu cadastro <br> Por favor, revise seus dados </b> `;
+             
+        } else {  
+            
+            if (CpfCnpj == 0 ) {
+                
+                div_mensagemCadastro.innerHTML = `<i style = "color : #ff0000;"> <b>Algo de errado aconteceu durante seu cadastro <br> Por favor, revise seus dados </b> `;
+             
+
+            } else {
+
+                if (medidaAgraria == 0 ) {
+
+                    console.log('Max foi genial, né?');
+
+                    div_mensagemCadastro.innerHTML = `<i style = "color : #ff0000;"> <b>Algo de errado aconteceu durante seu cadastro <br> Por favor, revise seus dados </b> ` ;
+
+                } else {
+
+                
+                    if (semente == "") {
+
+                        div_mensagemCadastro.innerHTML = `<i style = "color : #ff0000;"> <b>Algo de errado aconteceu durante seu cadastro <br> Por favor, revise seus dados </b> `;
+
+                    } else {
+
+                
+                        if (necessidade == "") {
+
+                            div_mensagemCadastro.innerHTML = `<i style = "color : #ff0000;"> <b>Algo de errado aconteceu durante seu cadastro <br> Por favor, revise seus dados </b> `;
+
+                        } else {
+
+                                if  (senha == "") {
+
+                                    div_mensagemCadastro.innerHTML = `<i style = "color : #ff0000;"> <b>Algo de errado aconteceu durante seu cadastro <br> Por favor, revise seus dados </b> `;
+
+
+                                } else {
+
+                                   if (estimativaProducao == 0) {
+      
+                                        div_mensagemCadastro.innerHTML = `<i style = "color : #ff0000;"> <b>Algo de errado aconteceu durante seu cadastro <br> Por favor, revise seus dados </b> `;
+
+                                   } else {
+
+                                        if (precoVenda == 0 ) {
+
+                                            div_mensagemCadastro.innerHTML = `<i style = "color : #ff0000;"> <b>Algo de errado aconteceu durante seu cadastro <br> Por favor, revise seus dados </b> `;
+
+                                        } else {
+
+                                            div_mensagemCadastro.innerHTML = ` <i style = "color : #0000ff;"><b>A equipe Solaris agradece a sua confiança. <br> Vamos iluminar suas vidas! </b>`;
+
+                                        }
+
+                                         
+                                    
+
+                                    } 
+
+                                }
+
+
+                            }
+
+                        }
+
+
+                    }
+
+                }
+            }
+
+        
+
+
+            // cálculo de estimativa 
+
+            let perdaProducao = estimativaProducao * 0.17; // perda em kg
+
+            let desempenho = estimativaProducao * precoVenda; // valor do peso da soja convertido em reais
+
+            let imposto = desempenho * 0.07; // valor em reais do tributo calculado
+            
+            let perdaValorFinal = desempenho * 0.10
+
+            let recuperacaoSoja = estimativaProducao * 0.10; // estimativa do aumento da produção e eficiencia do sistema após aplicacação
+
+            let ganho = desempenho * 0.10 // estimativa do aumento de valor e eficiencia do sistema após aplicação 
+
+            div_resultado_conta.innerHTML = `Sua colheita final foi de aproximadamente <i style = "color : #0000ff;"> <b> ${estimativaProducao}</i> KG's </b> de <b>${semente}</b>, rendendo cerca de R$<i style = "color : #0000ff;"> <b>${precoVenda} </b></i>.<br><br>
+            O total aproximado dos tributos é de R$<i style = "color : #ff0000;"><b> ${imposto}</b> </i> sobre o valor total da produção<br><br>
+            Estima-se uma perda próxima a <i style = "color : #ff0000;"><b> ${perdaProducao} </i> </b>KG's da produção devido a oscilações de luminosidade.<br><br>
+            Levando a um prejuízo em torno de R$<i style = "color : #ff0000;"><b>${perdaValorFinal}</b></i> sem tributação. <br><br>
+            Após a aplicação do sistema, o aumento da produção será próximo de <i style = "color : #008000;"><b>${recuperacaoSoja} <i> KG's </b> de <b>${semente}</b> e R$<i style = "color : #008000;"><b>${ganho}</b></i> `
+
+
+
+     
+
+
+
+
+        
+        
+        };
+        
+
+
+       /*
+        let nome = (ipt_nome_empresa.value);
+
+        let CpfCnpj = Number(ipt_cpf_cnjp.value);
+
+        let medidaAgraria = Number(ipt_medidas.value);
+
+        let semente = (ipt_semente.value);
+
+        let necessidade = (ipt_motivo_procura.value);
+
+        let senha = (ipt_senha.value);
+
+        let estimativaProducao = Number(ipt_producao.value);
+
+        let precoVenda = Number(ipt_preco_venda.value);
+        
+        if (nome == "" ||
+                    CpfCnpj == 0 ||
+                    medidaAgraria == "" ||
+                    semente == "" ||
+                    necessidade == "" ||
+                    senha == "" ||
+                    estimativaProducao == 0 ||
+                    precoVenda == 0 ) {
+
+                    div_mensagemCadastro.innerHTML = `<i style = "color : #ff0000;"> <b>Algo de errado aconteceu durante seu cadastro <br> Por favor, revise seus dados </b> `;
+                    
+                } else {
+                    
+                    div_mensagemCadastro.innerHTML = ` <i style = "color : #0000ff;"><b>A equipe Solaris agradece a sua confiança. <br> Vamos iluminar suas vidas! </b>`;
+                }
+            }
+                
+
+            ( Códio experimental, fora do contéudo passado em sala. Objetivo : otimização.)
+            
+            
+            
+            */
+
+</script>
+
+
+
+
+
+
+    
+
+
+</body>
+</html>
+
