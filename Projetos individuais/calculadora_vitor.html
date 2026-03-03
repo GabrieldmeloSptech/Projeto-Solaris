@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Financeira</title>
+</head>
+<body>
+    Insira o tamanho da área em (HA) : <input type="text" id="input_ha"><br>
+    Insira a cultura: <input type="text" id="input_cultivo"><br>
+    Produtividade esperada em (SC/HA) : <input type="text" id="input_sacas"><br>
+    Preço de venda por (SC/HA): <input type="text" id="input_venda"><br>
+    Insira o quanto você paga de imposto: <input type="text" id="input_imposto"><br>
+    <!-- Calculo do imposto é baseado em 7% como produtor rural<br> -->
+    <button onclick="calcularLiquido()"><b>Lucro líquido sem uso do Sensor</b></button><br>
+    <button onclick="liquidoSensor()"><b>Lucro líquido com o uso do Sensor</b></button>
+    <div id="div_mensagem"></div>
+</body>
+</html>
+<script>
+        
+       
+    function calcularLiquido(){
+    let hectare = Number(input_ha.value);
+    let sacas = Number(input_sacas.value);
+    let venda = Number(input_venda.value);
+    let imposto = Number(input_imposto.value);
+    let impostoFisica = imposto * Number(0.01);
+    let liquido = (hectare * sacas * venda) * impostoFisica;
+    
+    div_mensagem.innerHTML = `Seu lucro líquido sendo produtor rural sem o uso do sensor e com o cultivo de <b>${input_cultivo.value}</b> é de R$<b style = "color: #ff0000";>${liquido.toFixed(2)}</b>, com uma área de <b>${input_ha.value}</b> hectares!<br>`;
+     
+     }
+function liquidoSensor(){
+    let hectare = Number(input_ha.value);
+    let sacas = Number(input_sacas.value);
+    let venda = Number(input_venda.value);
+    let imposto = Number(input_imposto.value);
+    let impostoFisica = imposto * Number(0.01);
+    let produtividade = sacas * Number(0.10);
+    let produtividadeMax = produtividade + sacas;
+    let liquido = (hectare * sacas * venda) * impostoFisica;
+    let liquidoSensor = (hectare * produtividadeMax * venda) * impostoFisica;
+    let dif = liquidoSensor - liquido;
+
+    
+    div_mensagem.innerHTML += `Seu lucro líquido sendo produtor rural com o uso do sensor e com o cultivo de <b>${input_cultivo.value}</b> é de R$<b style ="color: #008000";>${liquidoSensor.toFixed(2)}</b>, com uma área de <b>${input_ha.value}</b> hectares!<br>
+    E a diferença entre usar nosso equipamento e não usar é de R$<b style = "color: #0000ff";>${dif.toFixed(2)}</b> por safra!`;
+    
+}
+
+</script>
