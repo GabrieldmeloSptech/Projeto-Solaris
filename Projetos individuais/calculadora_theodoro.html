@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 style="font-weight: bold;">Calculadora Financeira</h1>
+    <p>Utilize essa calculadora para conferir o quanto sua plantação 
+        pode render a mais com o uso do nosso serviço!
+    </p>
+    Insira a área da sua plantação (em hectares): 
+    <input type="text" id="input_hectares"><br><br>
+    Insira o rendimento médio dessa plantação: 
+    <input type="text" id="input_rendimento_medio"><br><br>
+    Insira a porcentagem de imposto paga: 
+    <input type="text" id="input_imposto"><br><br>
+    <button onclick="calcularLucro()">Calcular Lucro</button><br><br>
+    <div id="div_mensagem"></div>
+</body>
+</html>
+<script>
+    function calcularLucro(){
+        let hecates = Number(input_hectares.value);
+        let rendimentoMedio = Number(input_rendimento_medio.value);
+        let imposto = Number(input_imposto.value) / 100;
+
+        let lucroAtual = rendimentoMedio - ((rendimentoMedio * imposto));
+
+        let lucroNovo = (lucroAtual * 0.1) + lucroAtual;
+        let lucroLiquido = lucroNovo - ((lucroNovo * imposto));
+
+        div_mensagem.innerHTML = `<h3>Rendimento atual: <h3>
+            Rendimento médio: R$${lucroAtual.toFixed(2)}<br>
+            Total pago em impostos: R$${(rendimentoMedio * imposto).toFixed(2)}<br><br>
+            <h3>Rendimento com uso do serviço Solaris: 
+            Rendimento médio: R$${lucroLiquido.toFixed(2)}<br>
+            Total pago em impostos: R$${(lucroNovo * imposto).toFixed(2)}<br>
+            Sua plantação de ${hectares} hectares terá 10% a mais de aproveitamento!}`;
+        }
+</script>
