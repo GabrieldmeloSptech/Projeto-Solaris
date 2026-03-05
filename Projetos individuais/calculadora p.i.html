@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Calculadora de Rentabilidade do Projeto</h1>
+
+    Quantidade de sacas a cada 1 hectar :
+    <input type="text" id="input_sacas"> <br><br>
+
+
+    Quantos hectares :
+    <input type="text" id="input_hectar"> <br><br>
+
+
+    valor da saca:
+        <input type="text" id="input_valor"> <br><br>
+
+    hectar perdido: 
+    <input type="text" id="input_perda"> <br><br>
+
+    <button onclick="sem()">Calcular Perca</button>
+    <button onclick="com()">Calcular Oportunidade</button>
+
+    <div id="div_exibir"></div>
+    <div id="div_comparar"></div>
+
+</body>
+</html>
+<script>
+
+    function sem() {
+        let ideal = (Number (input_sacas.value) * Number(input_hectar.value) ) * Number(input_valor.value)
+
+        let percentual = (  Number(input_perda.value)  / Number(input_hectar.value) ) * 100
+
+        let perca = ideal * percentual / 100
+
+        let diferença = ideal - perca
+
+        div_exibir.innerHTML = `Essa safra deveria lhe render ${ideal}, mas só esta lhe rendendo ${diferença}, ou seja, esta sendo perdido R$${perca} por safra `
+
+
+      
+
+    }
+    function com () {
+       let ideal = (Number (input_sacas.value) * Number(input_hectar.value) ) * Number(input_valor.value)
+
+        let percentual = (  Number(input_perda.value)  / Number(input_hectar.value) ) * 100
+
+        let perca = ideal * percentual / 100
+
+        let diferença = ideal - perca
+
+        let solaris = diferença * 0.10
+
+        let oportunidade = diferença + solaris
+        
+        div_comparar.innerHTML = `Com o sensor você vai passar a ganhar R$${oportunidade}, sendo economizado R$${solaris} por safra `
+
+    }
+</script>
