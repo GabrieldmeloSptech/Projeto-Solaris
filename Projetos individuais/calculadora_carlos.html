@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Financeira - Solaris</title>
+</head>
+<body>
+    <div class="box1">
+        <h2>Você quer saber o quanto nosso serviço agrega na sua plantação?</h2>
+        <p>Insira o tamanho da área em HA(Hectares):
+            <input type="text" id="ipt_tamanhoHA">
+        </p>
+        <p>Insira o cultivo dessa área:
+            <input type="text" id="ipt_cultivo">
+        </p>
+        <p>Quanta essa plantação rende pra você (R$):
+            <input type="text" id="ipt_renda">
+        </p>
+        <p>Você paga alguma porcentagem de imposto sobre a plantação:
+            <input type="text" id="ipt_imposto">
+        </p>
+        <button onclick="calcularLucro()">Calcular Lucro</button>
+        <div id="resultado"></div>
+    </div> 
+    <script>
+        function calcularLucro() {
+            let hectares = Number(ipt_tamanhoHA.value);
+            let cultivo = ipt_cultivo.value;
+            let renda = Number(ipt_renda.value);
+            let impostoPercentual = Number(ipt_imposto.value) / 100;
+
+            let impostoPago = renda * impostoPercentual;
+            let lucroAtual = renda - impostoPago;
+
+            let ganhoProdutividade = lucroAtual * 0.10;
+            let novoLucro = lucroAtual + ganhoProdutividade;
+
+            resultado.innerHTML = `
+                <h3>Resultado para o seu cultivo de ${cultivo}</h3>
+                <p>Área analisada: <b>${hectares} hectares</b></p>
+                <p>Renda bruta por safra: <b>R$ ${renda.toFixed(2)}</b></p>
+                <p>Impostos pagos: <b>R$ ${impostoPago.toFixed(2)}</b></p>
+                <p>Lucro líquido atual: 
+                    <b>R$ ${lucroAtual.toFixed(2)}</b>
+                </p>
+                <hr>
+                <p>Ganho médio de produtividade com o Solaris: <b>10%</b></p>
+                <p style="color:green;">
+                    Lucro adicional estimado por safra:
+                    <b>R$ ${ganhoProdutividade.toFixed(2)}</b>
+                </p>
+                <p>
+                    Novo lucro líquido estimado:
+                    <b>R$ ${novoLucro.toFixed(2)}</b>
+                </p>
+            `;
+        }
+    </script>
+</body>
+</html>
