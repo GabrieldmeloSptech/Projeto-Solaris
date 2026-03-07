@@ -22,45 +22,80 @@
     hectar perdido: 
     <input type="text" id="input_perda"> <br><br>
 
-    <button onclick="sem()">Calcular Perca</button>
-    <button onclick="com()">Calcular Oportunidade</button>
+    Gasto com insumos/ mês :
+
+    <input type="text" id="ipt_insumo"> <br><br>
+
+    impostos pagos por insumo :
+    <input type="text" id="ipt_imposto"><br><br>
+
+
+    Seguro agrícola subsidiado:
+
+    <input type="text" id="ipt_proagro"><br><br>
+
+    Deseja usar o sensor (sim, não)
+
+    <input type="text" id="ipt_sensor">
+
+     <button onclick="sem()">Calcular Perca</button>
+
+
 
     <div id="div_exibir"></div>
-    <div id="div_comparar"></div>
+  
 
 </body>
 </html>
 <script>
 
     function sem() {
+        let insumo = Number(ipt_insumo.value)
+         let imposto =  (Number(ipt_imposto.value)/100) 
+        let insumoTotal = insumo + (imposto * insumo)
+        let porcentagemInsumo = insumoTotal/ 100
+
+        
+
         let ideal = (Number (input_sacas.value) * Number(input_hectar.value) ) * Number(input_valor.value)
 
         let percentual = (  Number(input_perda.value)  / Number(input_hectar.value) ) * 100
 
-        let perca = ideal * percentual / 100
+        let perda = (ideal *( percentual / 100)) 
 
-        let diferença = ideal - perca
+        let diferença = (ideal - perda) - insumoTotal
 
-        div_exibir.innerHTML = `Essa safra deveria lhe render ${ideal}, mas só esta lhe rendendo ${diferença}, ou seja, esta sendo perdido R$${perca} por safra `
-
-
-      
-
-    }
-    function com () {
-       let ideal = (Number (input_sacas.value) * Number(input_hectar.value) ) * Number(input_valor.value)
-
-        let percentual = (  Number(input_perda.value)  / Number(input_hectar.value) ) * 100
-
-        let perca = ideal * percentual / 100
-
-        let diferença = ideal - perca
-
+        let sensor = ipt_sensor.value
         let solaris = diferença * 0.10
-
         let oportunidade = diferença + solaris
         
-        div_comparar.innerHTML = `Com o sensor você vai passar a ganhar R$${oportunidade}, sendo economizado R$${solaris} por safra `
+
+
+div_exibir.innerHTML = ` Com base nas informações fornecidas, a estimativa de receita bruta da produção é de R$${ideal}. <br><br>
+
+Desse valor, ${porcentagemInsumo}% são destinados ao pagamento de insumos agrícolas, como sementes, fertilizantes e defensivos necessários para o cultivo.
+
+Além disso, foi considerada uma perda estimada de R$${perda} por hectare,
+ causada pela quantidade de exposição solar não ajustada adequadamente para a lavoura. 
+Essa condição pode reduzir a produtividade da área cultivada, 
+resultando em custos de manutenção da lavoura sem retorno proporcional em produção.<br><br>
+
+Após considerar os custos de insumos e as perdas associadas à produção, o resultado líquido estimado da safra é de R$${diferença}.
+ `
+    if (sensor == 'sim' ) {
+            
+    div_exibir.innerHTML +=   `<br><br>
+Com a implementação do sensor de monitoramento solar, estima-se uma melhora na eficiência da lavoura,
+reduzindo parte das perdas causadas pela exposição solar não ajustada.
+
+Com isso, o produtor passaria a obter aproximadamente R$${oportunidade} por safra,
+representando um ganho adicional de cerca de R$${solaris} em comparação ao cenário sem o sensor.
+
+Esse valor representa a economia gerada pela otimização da exposição solar da plantação,
+permitindo melhor aproveitamento da área cultivada e maior retorno econômico da produção.
+`
 
     }
+    
+}
 </script>
