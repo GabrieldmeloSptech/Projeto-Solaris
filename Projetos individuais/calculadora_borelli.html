@@ -54,15 +54,13 @@
          let imposto =  (Number(ipt_imposto.value)/100) 
         let insumoTotal = insumo + (imposto * insumo)
         let porcentagemInsumo = insumoTotal/ 100
+        let proagro = Number (ipt_agro.value)
 
         
 
-        let ideal = (Number (input_sacas.value) * Number(input_hectar.value) ) * Number(input_valor.value)
-
+        let ideal = (Number (input_sacas.value) * Number(input_hectar.value) ) * Number(input_valor.value) + proagro 
         let percentual = (  Number(input_perda.value)  / Number(input_hectar.value) ) * 100
-
         let perda = (ideal *( percentual / 100)) 
-
         let diferença = (ideal - perda) - insumoTotal
 
         let sensor = ipt_sensor.value
