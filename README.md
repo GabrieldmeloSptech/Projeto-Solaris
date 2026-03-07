@@ -1,2 +1,2 @@
 # Projeto-Luminosidade
-Projeto do grupo 10 de ADS 1 -A 
+Projeto do grupo 10 de 1ADSA

@@ -7,53 +7,60 @@
 </head>
 <body>
     <div class="box1">
-        <h2>Você quer saber o quanto nosso serviço agrega na sua plantação?</h2>
-        <p>Insira o tamanho da área em HA(Hectares):
+        <h1 style="color: blue; text-align: center;"><b>Calculadora financeira</b></h1>
+        <h2 style="text-align: center;">Você quer saber o quanto nosso serviço agrega na sua plantação?</h2>
+        <p style="text-align: center;">Insira o tamanho da área em HA(Hectares):
             <input type="text" id="ipt_tamanhoHA">
         </p>
-        <p>Insira o cultivo dessa área:
+        <p style="text-align: center;">Insira o cultivo dessa área:
             <input type="text" id="ipt_cultivo">
-        </p>
-        <p>Quanta essa plantação rende pra você (R$):
+        </p>        
+        <p style ="text-align: center;">Produtividade esperada em (SACAS/HA) : 
+            <input type="text" id="ipt_sacas">
+        </p>         
+        <p style="text-align: center;">Insira o quanto você ganha por (SACAS/HA) em R$:
             <input type="text" id="ipt_renda">
         </p>
-        <p>Você paga alguma porcentagem de imposto sobre a plantação:
+        <p style="text-align: center;">Você paga alguma porcentagem de imposto sobre a plantação:
             <input type="text" id="ipt_imposto">
         </p>
-        <button onclick="calcularLucro()">Calcular Lucro</button>
+    <div style="text-align: center;"><button onclick="calcularLucro()" style="color: black; background-color: cyan;"><b style="text-align: center;">Calcular Lucro</b></button></div>
         <div id="resultado"></div>
     </div> 
     <script>
         function calcularLucro() {
             let hectares = Number(ipt_tamanhoHA.value);
             let cultivo = ipt_cultivo.value;
-            let renda = Number(ipt_renda.value);
+            let sacas = Number(ipt_sacas.value);
+            let renda = Number(ipt_renda.value) * sacas;
             let impostoPercentual = Number(ipt_imposto.value) / 100;
+            let rendaTotal = renda * hectares;
 
-            let impostoPago = renda * impostoPercentual;
-            let lucroAtual = renda - impostoPago;
+            let impostoPago = rendaTotal * impostoPercentual;
+            let lucroAtual = rendaTotal - impostoPago;
 
-            let ganhoProdutividade = lucroAtual * 0.10;
-            let novoLucro = lucroAtual + ganhoProdutividade;
+            let ganhoProdutividade = rendaTotal * 0.10 ;
+            let impostoTotal = ganhoProdutividade * impostoPercentual
+            let novoLucro = ganhoProdutividade  + lucroAtual - impostoTotal;
 
             resultado.innerHTML = `
-                <h3>Resultado para o seu cultivo de ${cultivo}</h3>
+               <div style="text-align: center;"> <h3>Resultado para o seu cultivo de ${cultivo}</h3>
                 <p>Área analisada: <b>${hectares} hectares</b></p>
-                <p>Renda bruta por safra: <b>R$ ${renda.toFixed(2)}</b></p>
+                <p>Renda bruta por safra: <b>R$ ${rendaTotal.toFixed(2)}</b></p>
                 <p>Impostos pagos: <b>R$ ${impostoPago.toFixed(2)}</b></p>
                 <p>Lucro líquido atual: 
-                    <b>R$ ${lucroAtual.toFixed(2)}</b>
+                    <b style="color: red;">R$ ${lucroAtual.toFixed(2)}</b>
                 </p>
                 <hr>
                 <p>Ganho médio de produtividade com o Solaris: <b>10%</b></p>
-                <p style="color:green;">
+                <p>
                     Lucro adicional estimado por safra:
-                    <b>R$ ${ganhoProdutividade.toFixed(2)}</b>
+                    <b style="color: blue;">R$ ${ganhoProdutividade.toFixed(2)}</b>
                 </p>
                 <p>
                     Novo lucro líquido estimado:
-                    <b>R$ ${novoLucro.toFixed(2)}</b>
-                </p>
+                    <b style="color: green;">R$ ${novoLucro.toFixed(2)}</b>
+                </p> </div>
             `;
         }
     </script>

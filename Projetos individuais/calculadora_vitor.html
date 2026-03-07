@@ -25,7 +25,7 @@
     let sacas = Number(input_sacas.value);
     let venda = Number(input_venda.value);
     let imposto = Number(input_imposto.value);
-    let impostoFisica = imposto * Number(0.01);
+    let impostoFisica = imposto / 100;
     let liquido = (hectare * sacas * venda) * impostoFisica;
     
     div_mensagem.innerHTML = `Seu lucro líquido sendo produtor rural sem o uso do sensor e com o cultivo de <b>${input_cultivo.value}</b> é de R$<b style = "color: #ff0000";>${liquido.toFixed(2)}</b>, com uma área de <b>${input_ha.value}</b> hectares!<br>`;
